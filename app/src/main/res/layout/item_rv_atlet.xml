@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        tools:viewBindingIgnore="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imgDelete"/>
+        <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_atlet"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:drawablePadding="8dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgDelete"
+                app:drawableStartCompat="@drawable/ic_baseline_person_24"
+                app:drawableTint="@color/colorPrimary"/>
+        <TextView
+                android:id="@+id/txtKelamin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/jenis_kelamin"
+                android:drawablePadding="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtNama"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgDelete"
+                app:drawableStartCompat="@drawable/ic_baseline_supervisor_account_24"
+                app:drawableTint="@color/colorPrimary"/>
+        <TextView
+                android:id="@+id/txtUmur"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/umur"
+                android:drawablePadding="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtKelamin"
+                app:layout_constraintEnd_toEndOf="@+id/txtKelamin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:drawableStartCompat="@drawable/ic_baseline_date_range_24"
+                app:drawableTint="@color/colorPrimary"/>
+
+        <TextView
+                android:id="@+id/txtNilai"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nilai_kategori"
+                android:drawablePadding="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtUmur"
+                app:layout_constraintEnd_toEndOf="@+id/txtKelamin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:drawableStartCompat="@drawable/ic_baseline_assessment_24"
+                app:drawableTint="@color/colorPrimary"/>
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/detail"
+                android:textColor="@color/colorPrimary"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/colorPrimary"
+                app:cornerRadius="16sp"
+                app:backgroundTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/txtNilai"
+                app:layout_constraintStart_toStartOf="@+id/txtUmur"
+                app:layout_constraintEnd_toStartOf="@+id/btnPenilaian" android:layout_marginTop="16dp"/>
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPenilaian"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tambah_penilaian"
+                app:cornerRadius="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/imgDelete"
+                app:layout_constraintStart_toEndOf="@+id/btnDetail" android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@+id/btnDetail"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

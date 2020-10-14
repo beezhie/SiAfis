@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        tools:viewBindingIgnore="true">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+        <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_test"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"/>
+        <TextView
+                android:id="@+id/viewHasil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hasil_tes"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/txtNama"
+                app:layout_constraintStart_toStartOf="@+id/txtNama"
+                app:layout_constraintEnd_toStartOf="@+id/viewTingkat" android:layout_marginTop="8dp"/>
+        <TextView
+                android:id="@+id/txtHasil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hasil_tes"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@+id/viewHasil"
+                app:layout_constraintStart_toStartOf="@+id/viewHasil"
+                app:layout_constraintEnd_toEndOf="@+id/viewHasil" android:layout_marginTop="8dp"/>
+        <TextView
+                android:id="@+id/viewTingkat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tingkat"
+                android:gravity="center"
+                app:layout_constraintEnd_toStartOf="@+id/viewNilai" app:layout_constraintTop_toTopOf="@+id/viewHasil"
+                app:layout_constraintStart_toEndOf="@+id/viewHasil"/>
+        <TextView
+                android:id="@+id/txtTingkat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tingkat"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/viewTingkat"
+                app:layout_constraintStart_toEndOf="@+id/viewHasil"
+                app:layout_constraintTop_toBottomOf="@+id/viewTingkat" android:layout_marginTop="8dp"/>
+        <TextView
+                android:id="@+id/viewNilai"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nilai"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="@+id/txtNama"
+                app:layout_constraintTop_toTopOf="@+id/viewHasil"
+                app:layout_constraintStart_toEndOf="@+id/viewTingkat"/>
+        <TextView
+                android:id="@+id/txtNilai"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/nilai"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/viewNilai"
+                app:layout_constraintStart_toEndOf="@+id/viewTingkat"
+                app:layout_constraintTop_toBottomOf="@+id/viewNilai" android:layout_marginTop="8dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

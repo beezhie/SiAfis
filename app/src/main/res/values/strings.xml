@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">SiAfis</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo">TODO</string>
+
+    <string name="empty_fields">%1$s harus diisi</string>
+    <string name="not_valid">%1$s format salah</string>
+    <string name="nama_atlet">Nama Atlet</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="tambah_tanggal">Tambah Tanggal</string>
+    <string name="tanggal_pendataan">Tanggal Pendataan</string>
+    <string name="tambah_atlet">Tambah Atlet</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string>
+    <string name="umur">Umur</string>
+    <string name="tingkat">Tingkat</string>
+    <string name="detail">Detail</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="tambah_penilaian">Tambah Penilaian</string>
+    <string name="nilai_kategori">Nilai kategori</string>
+    <string name="jenis_penilaian">Jenis Penilaian</string>
+    <string name="nilai">Nilai</string>
+    <string name="hasil">Hasil</string>
+    <string name="nama_test">Nama Test</string>
+    <string name="hasil_tes">Hasil Tes</string>
+    <string name="hasil_test">Hasil Test</string>
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "658563777353",
+    "firebase_url": "https://siafis.firebaseio.com",
+    "project_id": "siafis",
+    "storage_bucket": "siafis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658563777353:android:afead5102adab75daf9098",
+        "android_client_info": {
+          "package_name": "com.siafis.apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658563777353-st7v9iudjk99rj0qm69ikfpp02824tk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi5T59_oIXBRASqYe1TMPjHjwl0qxgeLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658563777353-st7v9iudjk99rj0qm69ikfpp02824tk5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
