@@ -35,6 +35,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
 
     fun restoreItem(){
         listGetAtlet = listGetAtletFilter
+        this.sort = false
         notifyDataSetChanged()
     }
 
