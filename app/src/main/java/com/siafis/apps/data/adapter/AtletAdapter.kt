@@ -11,6 +11,8 @@ import com.siafis.apps.R
 import com.siafis.apps.data.model.Atlet
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.visible
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
     private var listGetAtlet: MutableList<Atlet> = ArrayList()
@@ -31,17 +33,30 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         notifyDataSetChanged()
     }
 
-    fun filterKategori(kategori: String, sort: Boolean) {
+    fun searchItem(item: String?) {
+        val dataFilter: MutableList<Atlet> = ArrayList()
+        this.sort = false
+        for (data in listGetAtletFilter) {
+            val nama: String = data.nama!!.toLowerCase(Locale.getDefault())
+            if (nama.contains(item!!)) {
+                dataFilter.add(data)
+            }
+        }
+        listGetAtlet = dataFilter
+        notifyDataSetChanged()
+    }
+
+    fun filterKategori(kategori: String, gender: String) {
         this.kategori = kategori
-        if(kategori == "Reset"){
+        if (kategori == "Reset") {
             this.sort = false
             listGetAtlet = listGetAtletFilter
-        }else{
-            this.sort = sort
+        } else {
+            this.sort = true
             listGetAtlet = listGetAtletFilter
             val result = listGetAtlet
                 .filter { filter ->
-                    filter.hasil.isNotEmpty() && filter.hasil.any { it.nama == kategori }
+                    filter.hasil.isNotEmpty() && filter.gender == gender && filter.hasil.any { it.nama == kategori }
                 }.map {
                     it.copy(
                         copyNilai = if (it.nama == "Multistage Fitness Tes") {
@@ -62,7 +77,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
     }
 
     override fun onBindViewHolder(holder: AtletHolder, position: Int) {
-        holder.bind(listGetAtlet[position])
+        holder.bind(listGetAtlet[position], position + 1)
     }
 
     override fun getItemCount(): Int {
@@ -74,15 +89,18 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         private var umur: TextView = itemView.findViewById(R.id.txtUmur)
         private var gender: TextView = itemView.findViewById(R.id.txtKelamin)
         private var nilai: TextView = itemView.findViewById(R.id.txtNilai)
+        private var number: TextView = itemView.findViewById(R.id.txtNumber)
         private var tambah: MaterialButton = itemView.findViewById(R.id.btnPenilaian)
         private var detail: MaterialButton = itemView.findViewById(R.id.btnDetail)
         private var delete: ImageButton = itemView.findViewById(R.id.imgDelete)
-        fun bind(item: Atlet) {
+        fun bind(item: Atlet, position: Int) {
             nama.text = item.nama
             umur.text = item.umur.toString()
             gender.text = item.gender
             if (sort) {
                 nilai.visible()
+                number.visible()
+                number.text = position.toString()
                 if (item.nama == "Multistage Fitness Tes") {
                     nilai.text = "Penilaian tes : ${item.hasil.find { it.nama == kategori }?.nilai}"
                 } else {
@@ -90,6 +108,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
                 }
             } else {
                 nilai.gone()
+                number.gone()
             }
             tambah.setOnClickListener { onItemClick!!.onItemClicked(item, false) }
             detail.setOnClickListener { onItemClick!!.onItemClicked(item, true) }

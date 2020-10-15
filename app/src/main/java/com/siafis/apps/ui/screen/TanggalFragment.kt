@@ -54,6 +54,9 @@ class TanggalFragment : BaseFragment() {
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
         }
+        binding.imgProfil.setOnClickListener {
+            binding.root.snackBar("Nunggu si Galih")
+        }
         tanggalAdapter.itemClick(object : TanggalAdapter.OnItemClick {
             override fun onItemClicked(item: Tanggal) {
                 val bundle = Bundle()

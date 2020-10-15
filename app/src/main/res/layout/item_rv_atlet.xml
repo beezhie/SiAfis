@@ -18,9 +18,23 @@
                 android:layout_height="wrap_content"
                 android:tint="@color/colorPrimary"
                 android:src="@drawable/ic_baseline_delete_24"
+                android:contentDescription="@string/todo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/imgDelete"/>
+
+        <TextView
+                android:id="@+id/txtNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/imgDelete"
+                app:layout_constraintTop_toBottomOf="@+id/imgDelete"
+                app:layout_constraintStart_toStartOf="@+id/imgDelete"
+                android:layout_marginTop="8dp"
+                />
         <TextView
                 android:id="@+id/txtNama"
                 android:layout_width="0dp"

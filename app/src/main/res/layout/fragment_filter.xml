@@ -5,8 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:background="@color/background"
-              tools:context=".ui.screen.DetailAtletFragment">
+              tools:context=".ui.screen.FilterFragment">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_layout"
@@ -32,11 +31,11 @@
                     android:layout_height="0dp"/>
 
             <TextView
-                    android:id="@+id/nameUser"
+                    android:id="@+id/name_toolbar"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/tambah_tanggal"
+                    android:text="@string/filter_tes"
                     android:gravity="center_vertical"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                     android:textColor="@android:color/white"/>
@@ -70,62 +69,48 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <TextView
-                        android:id="@+id/viewJenis"
-                        android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/kategori"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/jenis_kelamin"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:errorEnabled="true"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp"/>
-                <TextView
-                        android:id="@+id/txtJenis"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/jenis_kelamin"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintTop_toTopOf="@+id/viewJenis"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/viewJenis"/>
-                <TextView
-                        android:id="@+id/viewUmur"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/umur"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/viewJenis"
-                        app:layout_constraintTop_toBottomOf="@+id/viewJenis"/>
-                <TextView
-                        android:id="@+id/txtUmur"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/umur"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintTop_toTopOf="@+id/viewUmur"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/viewUmur"/>
-                <TextView
-                        android:id="@+id/viewHasilTes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:text="@string/hasil_test"
-                        app:layout_constraintTop_toBottomOf="@+id/txtUmur"
-                        app:layout_constraintEnd_toEndOf="@+id/txtJenis"
-                        app:layout_constraintStart_toStartOf="@+id/viewUmur"
-                        android:layout_marginTop="32dp"/>
-                <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvHasil"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/viewHasilTes"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginTop="8dp"
-                        tools:listitem="@layout/item_rv_hasil"
-                        tools:itemCount="6"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        >
 
+                    <AutoCompleteTextView
+                            android:id="@+id/etKategori"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/kategori_tes"
+                            android:inputType="none"
+                            android:singleLine="true"
+                            />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/jeniskelamin"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:layout_constraintTop_toBottomOf="@+id/kategori"
+                        app:layout_constraintStart_toStartOf="@+id/kategori"
+                        app:layout_constraintEnd_toEndOf="@+id/kategori"
+                        >
+
+                    <AutoCompleteTextView
+                            android:id="@+id/etJeniskelamin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/jenis_kelamin"
+                            android:inputType="none"
+                            android:singleLine="true"
+                            />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                     android:id="@+id/lyt_spacer"
                     android:layout_width="match_parent"

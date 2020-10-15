@@ -1,21 +1,24 @@
 package com.siafis.apps.ui.screen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
 import com.siafis.apps.data.model.Hasil
 import com.siafis.apps.databinding.FragmentAtletBinding
 import com.siafis.apps.ui.base.BaseFragment
+import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.snackBar
+import com.siafis.apps.utils.visible
 import java.io.Serializable
 import java.util.*
-import kotlin.collections.HashMap
+
 
 class AtletFragment : BaseFragment() {
 
@@ -52,6 +55,7 @@ class AtletFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = atletAdapter
         }
+        binding.txtSort.gone()
     }
 
     private fun setupAction() {
@@ -60,19 +64,24 @@ class AtletFragment : BaseFragment() {
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
         }
-
-        binding.imgFilter.setOnClickListener {
-//            val items = arrayOf("Red", "Orange", "Yellow", "Blue")
-            val items = kategori.map { it.value }
-            val builder = AlertDialog.Builder(requireContext())
-            with(builder) {
-                setTitle("Filter Berdasarkan Penilaian")
-                setItems(items.toTypedArray()) { _, which ->
-                    binding.root.snackBar(items[which] + " is clicked")
-                    atletAdapter.filterKategori(items[which],true)
-                }
-                show()
+        binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                atletAdapter.searchItem(query)
+                binding.txtSort.gone()
+                binding.btnSearch.onActionViewCollapsed()
+                return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                atletAdapter.searchItem(newText)
+                binding.txtSort.gone()
+                return true
+            }
+        })
+        binding.imgFilter.setOnClickListener {
+            val fragment = FilterFragment()
+            fragment.setTargetFragment(this, 4)
+            fragment.show(parentFragmentManager, fragment.tag)
         }
 
         atletAdapter.itemClick(object : AtletAdapter.OnItemClick {
@@ -146,6 +155,7 @@ class AtletFragment : BaseFragment() {
             .document(id)
             .collection("atlet")
             .addSnapshotListener { snapshot, e ->
+                binding.txtSort.gone()
                 if (e != null) {
                     binding.root.snackBar("Error document : $e")
                     return@addSnapshotListener
@@ -176,27 +186,37 @@ class AtletFragment : BaseFragment() {
             }
     }
 
-
+    @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val result = data?.extras
-        if (requestCode == 1) {
-            val atlet = result?.getSerializable("atlet")
-            addAtlet(atlet!!)
-        } else if (requestCode == 2) {
-            val nilai = result?.getSerializable("nilai") as HashMap<*, *>
-            addPenilaian(
-                atlet = nilai["id"].toString(),
-                type = nilai["kategori"].toString(),
-                nilai = hashMapOf(
-                    "nama" to nilai["kategori"].toString(),
-                    "hasil" to nilai["hasiltes"],
-                    "nilai" to nilai["nilai"],
-                    "tingkat" to nilai["tingkat"],
-                    "predikat" to nilai["predikat"]
+        when (requestCode) {
+            1 -> {
+                val atlet = result?.getSerializable("atlet")
+                addAtlet(atlet!!)
+            }
+            2 -> {
+                val nilai = result?.getSerializable("nilai") as HashMap<*, *>
+                addPenilaian(
+                    atlet = nilai["id"].toString(),
+                    type = nilai["kategori"].toString(),
+                    nilai = hashMapOf(
+                        "nama" to nilai["kategori"].toString(),
+                        "hasil" to nilai["hasiltes"],
+                        "nilai" to nilai["nilai"],
+                        "tingkat" to nilai["tingkat"],
+                        "predikat" to nilai["predikat"]
+                    )
                 )
-            )
-
+            }
+            4 -> {
+                val gender = result?.getString("gender")!!
+                val kategori = result.getString("kategori")!!
+                println("Gender : $gender | Kategori : $kategori")
+                atletAdapter.filterKategori(kategori = kategori, gender = gender)
+                binding.txtSort.visible()
+                binding.txtSort.text = "Diurutkan berdasarkan tes : $kategori"
+            }
         }
     }
 
