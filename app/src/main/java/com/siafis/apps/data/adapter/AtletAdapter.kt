@@ -33,6 +33,11 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         notifyDataSetChanged()
     }
 
+    fun restoreItem(){
+        listGetAtlet = listGetAtletFilter
+        notifyDataSetChanged()
+    }
+
     fun searchItem(item: String?) {
         val dataFilter: MutableList<Atlet> = ArrayList()
         this.sort = false

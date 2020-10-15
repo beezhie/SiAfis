@@ -64,6 +64,16 @@ class AtletFragment : BaseFragment() {
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
         }
+        binding.imgRestore.setOnClickListener {
+            atletAdapter.restoreItem()
+            binding.txtSort.gone()
+        }
+        binding.imgFilter.setOnClickListener {
+            val fragment = FilterFragment()
+            fragment.setTargetFragment(this, 4)
+            fragment.show(parentFragmentManager, fragment.tag)
+        }
+
         binding.btnSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 atletAdapter.searchItem(query)
@@ -78,11 +88,6 @@ class AtletFragment : BaseFragment() {
                 return true
             }
         })
-        binding.imgFilter.setOnClickListener {
-            val fragment = FilterFragment()
-            fragment.setTargetFragment(this, 4)
-            fragment.show(parentFragmentManager, fragment.tag)
-        }
 
         atletAdapter.itemClick(object : AtletAdapter.OnItemClick {
             override fun onItemClicked(item: Atlet, isView: Boolean) {

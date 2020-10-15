@@ -35,9 +35,20 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/textView"
-                    app:layout_constraintEnd_toStartOf="@+id/imgFilter"
+                    app:layout_constraintEnd_toStartOf="@+id/imgRestore"
                     />
 
+            <ImageView
+                    android:id="@+id/imgRestore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_baseline_restore_24"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imgFilter"
+                    android:layout_marginEnd="8dp"
+                    />
             <ImageView
                     android:id="@+id/imgFilter"
                     android:layout_width="wrap_content"
