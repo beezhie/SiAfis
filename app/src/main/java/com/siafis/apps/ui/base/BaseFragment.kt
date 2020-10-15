@@ -6,7 +6,6 @@ import androidx.navigation.NavOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.siafis.apps.R
-import kotlin.math.tan
 
 open class BaseFragment : Fragment() {
 
@@ -24,7 +23,8 @@ open class BaseFragment : Fragment() {
         "K003" to "Multistage Fitness Tes",
         "K004" to "Hand Wall Toss",
         "K005" to "Push Up",
-        "K006" to "Tes Akselerasi 35 Meter"
+        "K006" to "Tes Akselerasi 35 Meter",
+        "K000" to "Reset"
     )
 
     protected lateinit var db: FirebaseFirestore

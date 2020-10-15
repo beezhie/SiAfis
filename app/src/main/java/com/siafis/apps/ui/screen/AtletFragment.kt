@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
@@ -58,6 +59,20 @@ class AtletFragment : BaseFragment() {
             val fragment = TambahAtletFragment()
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
+        }
+
+        binding.imgFilter.setOnClickListener {
+//            val items = arrayOf("Red", "Orange", "Yellow", "Blue")
+            val items = kategori.map { it.value }
+            val builder = AlertDialog.Builder(requireContext())
+            with(builder) {
+                setTitle("Filter Berdasarkan Penilaian")
+                setItems(items.toTypedArray()) { _, which ->
+                    binding.root.snackBar(items[which] + " is clicked")
+                    atletAdapter.filterKategori(items[which],true)
+                }
+                show()
+            }
         }
 
         atletAdapter.itemClick(object : AtletAdapter.OnItemClick {
@@ -154,7 +169,7 @@ class AtletFragment : BaseFragment() {
                             )
                         )
                     }
-                    atletAdapter.replaceAll(atlet, false)
+                    atletAdapter.replaceAll(atlet)
                 } else {
                     binding.root.snackBar("Data Kosong")
                 }
