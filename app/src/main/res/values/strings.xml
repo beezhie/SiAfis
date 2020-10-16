@@ -14,7 +14,7 @@
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="jenis_kelamin">Jenis Kelamin</string>
     <string name="umur">Umur</string>
-    <string name="tingkat">Tingkat</string>
+    <string name="tingkat">Level</string>
     <string name="detail">Detail</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
@@ -31,4 +31,6 @@
     <string name="data_tanggal_pendataaan">Data Tanggal Pendataaan</string>
     <string name="filter_tes">Filter Tes</string>
     <string name="kategori_tes">Kategori Tes</string>
+    <string name="selanjutnya">Selanjutnya</string>
+    <string name="lewati">Lewati</string>
 </resources>

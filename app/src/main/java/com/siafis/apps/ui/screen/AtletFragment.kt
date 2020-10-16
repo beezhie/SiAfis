@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
@@ -16,6 +17,9 @@ import com.siafis.apps.ui.base.BaseFragment
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.snackBar
 import com.siafis.apps.utils.visible
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 import java.io.Serializable
 import java.util.*
 
@@ -41,6 +45,16 @@ class AtletFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        appPreference.atlet.asLiveData().observe(viewLifecycleOwner, { guideAtlet ->
+            if (guideAtlet == null || !guideAtlet) {
+                setGuideDate(
+                    binding.imgAdd,
+                    1,
+                    "Menu Tambah",
+                    "Menu ini digunakan untuk menambahkan atlet yang akan dinilai"
+                )
+            }
+        })
         arguments?.takeIf { it.containsKey(ID) }?.apply {
             id = getString(ID)!!
             setupUI()
@@ -118,6 +132,42 @@ class AtletFragment : BaseFragment() {
             }
 
         })
+    }
+
+    private fun setGuideDate(view: View, posisi: Int, title: String, description: String) {
+        GuideView.Builder(requireContext())
+            .setTitle(title)
+            .setContentText(description)
+            .setContentTextSize(12)//optional
+            .setTitleTextSize(14)
+            .setGravity(Gravity.center)
+            .setTargetView(view)
+            .setDismissType(DismissType.anywhere)
+            .setGuideListener {
+                when (posisi) {
+                    1 -> setGuideDate(
+                        binding.imgFilter,
+                        2,
+                        "Menu Filter",
+                        "Menu ini digunakan untuk memfilter atlet berdasarkan tes yang diambil dan jenis kelaminnya"
+                    )
+                    2 -> setGuideDate(
+                        binding.imgRestore,
+                        3,
+                        "Menu Reset",
+                        "Menu ini digunakan untuk mereset ulang daftar atlet setelah melakakukan filter"
+                    )
+                    3 -> setGuideDate(
+                        binding.btnSearch,
+                        4,
+                        "Menu Search",
+                        "Menu ini digunakan untuk mencari nama atlet yang telah terdata"
+                    )
+                    else -> binding.root.snackBar("Complete")
+                }
+            }
+            .build()
+            .show()
     }
 
     private fun addAtlet(atlet: Serializable) {

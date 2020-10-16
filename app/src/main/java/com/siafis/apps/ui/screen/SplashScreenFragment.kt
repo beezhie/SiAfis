@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.siafis.apps.R
 import com.siafis.apps.databinding.FragmentSplashScreenBinding
@@ -25,13 +26,20 @@ class SplashScreenFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Handler(Looper.getMainLooper()).postDelayed({
-            if(auth.currentUser == null){
-                findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//
+//        }, 3000)
+        appPreference.intro.asLiveData().observe(viewLifecycleOwner,{
+            if(it == null || !it){
+                findNavController().navigate(R.id.action_splashScreenFragment_to_introFragment)
             }else{
-                findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
+                if(auth.currentUser == null){
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+                }else{
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
+                }
             }
-        }, 3000)
+        })
     }
 
 }

@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.siafis.apps.R
+import com.siafis.apps.data.local.AppPreference
 
 open class BaseFragment : Fragment() {
 
@@ -27,6 +28,7 @@ open class BaseFragment : Fragment() {
         "K000" to "Reset"
     )
 
+    protected lateinit var appPreference: AppPreference
     protected lateinit var db: FirebaseFirestore
     protected lateinit var auth: FirebaseAuth
 
@@ -34,5 +36,6 @@ open class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+        appPreference = AppPreference(requireContext())
     }
 }

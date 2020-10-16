@@ -66,6 +66,7 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
 
         binding.etNilai.clearInput(binding.nilai)
         binding.tingkat.gone()
+        binding.etNilai.hint = "Hasil"
     }
 
     private fun setupAction() {
@@ -73,9 +74,10 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
         binding.etJenisPenilaian.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
             if (binding.etJenisPenilaian.text.toString().trim() == "Multistage Fitness Tes") {
                 binding.tingkat.visible()
+                binding.etNilai.hint = "Bolak Balik"
             } else {
                 binding.tingkat.gone()
-                binding.etTingkat.text = "0".toEditable()
+                binding.etNilai.hint = "Hasil"
             }
         }
         binding.iconAction.setOnClickListener {

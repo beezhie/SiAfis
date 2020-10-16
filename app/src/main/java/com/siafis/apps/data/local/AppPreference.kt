@@ -32,7 +32,31 @@ class AppPreference(
         }
     }
 
+    val tanggal: Flow<Boolean?>
+        get() = dataStore.data.map { preferences ->
+            preferences[KEY_GUIDE_DATE]
+        }
+
+    suspend fun saveTanggal(date: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[KEY_GUIDE_DATE] = date
+        }
+    }
+
+    val atlet: Flow<Boolean?>
+        get() = dataStore.data.map { preferences ->
+            preferences[KEY_GUIDE_ALTET]
+        }
+
+    suspend fun saveAtlet(atlet: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[KEY_GUIDE_ALTET] = atlet
+        }
+    }
+
     companion object {
         val KEY_INTRO = preferencesKey<Boolean>("key_intro")
+        val KEY_GUIDE_DATE = preferencesKey<Boolean>("key_guide_date")
+        val KEY_GUIDE_ALTET = preferencesKey<Boolean>("key_guide_atlet")
     }
 }

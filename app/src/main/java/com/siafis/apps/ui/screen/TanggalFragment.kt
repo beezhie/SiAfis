@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
@@ -16,6 +17,9 @@ import com.siafis.apps.ui.base.BaseFragment
 import com.siafis.apps.utils.snackBar
 import com.siafis.apps.utils.timeToDate
 import com.siafis.apps.utils.toTimeStamp
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 import java.util.*
 
 
@@ -34,7 +38,17 @@ class TanggalFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        appPreference.tanggal.asLiveData().observe(viewLifecycleOwner, { guideTanggal ->
+            println("GUIDE $guideTanggal")
+            if (guideTanggal == null || !guideTanggal) {
+                setGuideDate(
+                    binding.imgAdd,
+                    1,
+                    "Menu Tambah",
+                    "Menu ini digunakan untuk menambahkan tanggal pendataan atlet"
+                )
+            }
+        })
         setupUI()
         setupAction()
         getTanggal()
@@ -77,6 +91,25 @@ class TanggalFragment : BaseFragment() {
                     }
             }
         })
+    }
+
+    private fun setGuideDate(view: View, posisi: Int, title: String, description: String) {
+        GuideView.Builder(requireContext())
+            .setTitle(title)
+            .setContentText(description)
+            .setContentTextSize(12)//optional
+            .setTitleTextSize(14)
+            .setGravity(Gravity.center)
+            .setTargetView(view)
+            .setDismissType(DismissType.anywhere)
+            .setGuideListener {
+                when (posisi) {
+                    1 -> setGuideDate(binding.imgProfil,2,"Menu Profil","Menu ini digunakan untuk menampilkan profil pengembang aplikasi")
+                    else -> binding.root.snackBar("Complete")
+                }
+            }
+            .build()
+            .show()
     }
 
     private fun addTanggal(tanggal: Date?) {

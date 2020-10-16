@@ -48,7 +48,7 @@ class DetailAtletFragment(val atlet: Atlet) : BottomSheetDialogFragment() {
 
         binding.nameUser.text = atlet.nama
         binding.txtJenis.text = ": ${atlet.gender}"
-        binding.txtUmur.text = ": ${atlet.umur.toString()}"
+        binding.txtUmur.text = ": ${atlet.umur.toString()} Tahun"
 
         hasilAdapter = HasilAdapter()
         binding.rvHasil.apply {

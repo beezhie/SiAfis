@@ -63,23 +63,14 @@ class TambahAtletFragment : BottomSheetDialogFragment() {
                 )
             )
 
-            validation[1] = if (binding.umur.inputError(
-                    umur, resources.getString(
-                        R.string.empty_fields,
-                        "Umur"
-                    )
-                )) {
-                if (umur.toInt() in 16..19) {
-                    true
-                } else {
-                    binding.umur.error = "Masukkan umur rentang 16 sampai 19 tahun"
-                    false
-                }
-            } else {
-                false
-            }
+            validation[1] = binding.umur.inputError(
+                umur, resources.getString(
+                    R.string.empty_fields,
+                    "Umur"
+                )
+            )
 
-            if(!validation.contains(false)){
+            if (!validation.contains(false)) {
                 val data = hashMapOf(
                     "nama" to nama,
                     "umur" to umur.toLong(),

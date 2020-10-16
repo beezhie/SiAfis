@@ -33,7 +33,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         notifyDataSetChanged()
     }
 
-    fun restoreItem(){
+    fun restoreItem() {
         listGetAtlet = listGetAtletFilter
         this.sort = false
         notifyDataSetChanged()
@@ -54,26 +54,21 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
 
     fun filterKategori(kategori: String, gender: String) {
         this.kategori = kategori
-        if (kategori == "Reset") {
-            this.sort = false
-            listGetAtlet = listGetAtletFilter
-        } else {
-            this.sort = true
-            listGetAtlet = listGetAtletFilter
-            val result = listGetAtlet
-                .filter { filter ->
-                    filter.hasil.isNotEmpty() && filter.gender == gender && filter.hasil.any { it.nama == kategori }
-                }.map {
-                    it.copy(
-                        copyNilai = if (it.nama == "Multistage Fitness Tes") {
-                            it.hasil.find { res -> res.nama == kategori }?.nilai
-                        } else {
-                            it.hasil.find { res -> res.nama == kategori }?.hasil
-                        }
-                    )
-                }
-            listGetAtlet = result.sortedByDescending { it.copyNilai }.toMutableList()
-        }
+        this.sort = true
+        listGetAtlet = listGetAtletFilter
+        val result = listGetAtlet
+            .filter { filter ->
+                filter.hasil.isNotEmpty() && filter.gender == gender && filter.hasil.any { it.nama == kategori }
+            }.map {
+                it.copy(
+                    copyNilai = if (it.nama == "Multistage Fitness Tes") {
+                        it.hasil.find { res -> res.nama == kategori }?.nilai
+                    } else {
+                        it.hasil.find { res -> res.nama == kategori }?.hasil
+                    }
+                )
+            }
+        listGetAtlet = result.sortedByDescending { it.copyNilai }.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -101,7 +96,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         private var delete: ImageButton = itemView.findViewById(R.id.imgDelete)
         fun bind(item: Atlet, position: Int) {
             nama.text = item.nama
-            umur.text = item.umur.toString()
+            umur.text = "${item.umur.toString()} Tahun"
             gender.text = item.gender
             if (sort) {
                 nilai.visible()
