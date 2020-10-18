@@ -1,7 +1,6 @@
 package com.siafis.apps.ui.screen
 
 import android.os.Bundle
-import android.view.FrameMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +16,37 @@ import kotlin.math.abs
 
 
 class IntroFragment : BaseFragment() {
-    private val binding:FragmentIntroBinding by lazy {
+    private val binding: FragmentIntroBinding by lazy {
         FragmentIntroBinding.inflate(layoutInflater)
     }
+    private val content = listOf(
+        listOf(
+            "SI-AFIS",
+            "Vertical Jump Tes",
+            "Hexagonal Obstacle Tes",
+            "Multistage Fitness Tes",
+            "Hand Wall Toss",
+            "Push Up Tes",
+            "Tes Akselerasi 35 Meter"
+        ),
+        listOf(
+            R.drawable.voly,
+            R.drawable.vertical,
+            R.drawable.hexagonal,
+            R.drawable.multistage,
+            R.drawable.handwall,
+            R.drawable.pushup, R.drawable.akselerasi
+        ),
+        listOf(
+            "Aplikasi Analisis fisik Atlet cabang olahraga Bola Voli",
+            "Vertical Jump atau lompatan vertikal adalah tindakan melompat ke atas ke udara. Ini adalah latihan yang efektif untuk membangun daya tahan dan daya ledak. Ini juga merupakan tes standar untuk mengukur output daya atlet.",
+            "Hexagonal tes adalah tes kelincahan dengan melompat dalam berbagai arah, dengan kecepatan dan juga tes kemampuan untuk bergerak cepat sekaligus menjaga keseimbangan dan konsentrasi. Tes ini mengharuskan atlet untuk melakukan serangkaian dua kaki bolak-balik melompati sisi sebuah segi enam.",
+            "Multistage Fitness Test adalah salah satu cara untuk mengetahui tingkat kebugaran jasmani seseorang. Biasanya tes MFT ini dilakukan pada olahraga bola basket, yang ditujukan untuk mengetahui kebugaran jasmani atlet serta wasitnya.",
+            "Belum tahu",
+            "Push up adalah salah satu macam bentuk tes untuk mengukur kekuatan otot lengan."
+        ,"Akselerasi adalah suatu latihan yang di dalamnya berangsur-angsur adanya suatu kreasi atau jeda lari cepat dari jogging untuk jalan diakhiri dengan lari cepa"
+        )
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +61,8 @@ class IntroFragment : BaseFragment() {
         setupAction()
     }
 
-    private fun setupUI(){
-        val pagerAdapter = ScreenSlidePagerAdapter(this)
+    private fun setupUI() {
+        val pagerAdapter = ScreenSlidePagerAdapter(this,content)
         binding.viewPager.adapter = pagerAdapter
         binding.viewPager.setPageTransformer(DepthPageTransformer())
 
@@ -43,26 +70,29 @@ class IntroFragment : BaseFragment() {
         { _, _ -> }.attach()
     }
 
-    private fun setupAction(){
+    private fun setupAction() {
         binding.btnSkip.setOnClickListener {
-            if(auth.currentUser == null){
+            if (auth.currentUser == null) {
                 findNavController().navigate(R.id.action_introFragment_to_loginFragment)
-            }else{
+            } else {
                 findNavController().navigate(R.id.action_introFragment_to_tanggalFragment)
             }
         }
     }
 
     class ScreenSlidePagerAdapter(
-        fragment: Fragment
+        fragment: Fragment,
+        val content:List<List<Any>>
     ) : FragmentStateAdapter(fragment) {
 
-        override fun getItemCount(): Int = 6
+        override fun getItemCount(): Int = content[0].size
 
         override fun createFragment(position: Int): Fragment {
             val fragment = ContentIntroFragment()
             fragment.arguments = Bundle().apply {
-                putInt("INTRO", position)
+                putString(ContentIntroFragment.TITLE,content[0][position].toString())
+                putInt(ContentIntroFragment.IMAGE, content[1][position] as Int)
+                putString(ContentIntroFragment.DESCRIPTION,content[2][position].toString())
             }
             return fragment
         }

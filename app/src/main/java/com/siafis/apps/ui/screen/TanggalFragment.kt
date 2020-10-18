@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.Query
@@ -17,6 +18,7 @@ import com.siafis.apps.ui.base.BaseFragment
 import com.siafis.apps.utils.snackBar
 import com.siafis.apps.utils.timeToDate
 import com.siafis.apps.utils.toTimeStamp
+import kotlinx.coroutines.launch
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
@@ -63,13 +65,16 @@ class TanggalFragment : BaseFragment() {
     }
 
     private fun setupAction() {
+        lifecycleScope.launch {
+            appPreference.saveIntro(true)
+        }
         binding.imgAdd.setOnClickListener {
             val fragment = TambahTanggalFragment()
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
         }
         binding.imgProfil.setOnClickListener {
-            binding.root.snackBar("Nunggu si Galih")
+            findNavController().navigate(R.id.action_tanggalFragment_to_profilFragment, null, getNavOptions())
         }
         tanggalAdapter.itemClick(object : TanggalAdapter.OnItemClick {
             override fun onItemClicked(item: Tanggal) {
@@ -104,8 +109,13 @@ class TanggalFragment : BaseFragment() {
             .setDismissType(DismissType.anywhere)
             .setGuideListener {
                 when (posisi) {
-                    1 -> setGuideDate(binding.imgProfil,2,"Menu Profil","Menu ini digunakan untuk menampilkan profil pengembang aplikasi")
-                    else -> binding.root.snackBar("Complete")
+                    1 -> setGuideDate(
+                        binding.imgProfil,
+                        2,
+                        "Menu Profil",
+                        "Menu ini digunakan untuk menampilkan profil pengembang aplikasi"
+                    )
+                    else -> lifecycleScope.launch { appPreference.saveTanggal(true) }
                 }
             }
             .build()

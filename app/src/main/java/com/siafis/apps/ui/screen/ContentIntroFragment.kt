@@ -1,6 +1,5 @@
 package com.siafis.apps.ui.screen
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +14,12 @@ class ContentIntroFragment : Fragment() {
         FragmentContentIntroBinding.inflate(layoutInflater)
     }
 
+    companion object {
+        const val TITLE = "TITLE"
+        const val IMAGE = "IMAGE"
+        const val DESCRIPTION = "DESCRIPTION"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,11 +27,12 @@ class ContentIntroFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        arguments?.takeIf { it.containsKey("INTRO") }?.apply {
-           binding.txtContent.text = "Content ${getInt("INTRO")}"
+        arguments?.takeIf { it.containsKey("TITLE") }?.apply {
+            binding.txtContent.text = getString(TITLE)
+            binding.imgContent.setImageResource(getInt(IMAGE))
+            binding.txtDescription.text = getString(DESCRIPTION)
         }
     }
 }

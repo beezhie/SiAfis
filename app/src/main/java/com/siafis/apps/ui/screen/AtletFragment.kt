@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
@@ -17,6 +18,7 @@ import com.siafis.apps.ui.base.BaseFragment
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.snackBar
 import com.siafis.apps.utils.visible
+import kotlinx.coroutines.launch
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
@@ -163,7 +165,7 @@ class AtletFragment : BaseFragment() {
                         "Menu Search",
                         "Menu ini digunakan untuk mencari nama atlet yang telah terdata"
                     )
-                    else -> binding.root.snackBar("Complete")
+                    else -> lifecycleScope.launch { appPreference.saveAtlet(true) }
                 }
             }
             .build()
