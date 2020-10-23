@@ -1,6 +1,7 @@
 package com.siafis.apps.ui.screen
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Resources
 import android.media.MediaPlayer
@@ -26,7 +27,7 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
     private val binding: FragmentTambahPenilaianBinding by lazy {
         FragmentTambahPenilaianBinding.inflate(layoutInflater)
     }
-    private var mediaPlayer:MediaPlayer? = null
+    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var mBehavior: BottomSheetBehavior<*>
     private val multistage = listOf(7, 8, 8, 9, 9, 10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16)
 
@@ -68,6 +69,8 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
         binding.etTingkat.setAdapter(adaptertTingkat)
         binding.etTingkat.setText(itemsTingkat[0].toString(), false)
 
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.beeptest)
+
         binding.etNilai.clearInput(binding.nilai)
         binding.tingkat.gone()
         binding.btnAudio.gone()
@@ -88,15 +91,14 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
             }
         }
         binding.btnAudio.setOnClickListener {
-           if(binding.btnAudio.text == resources.getString(R.string.mulai_audio)){
-               mediaPlayer = MediaPlayer.create(requireContext(), R.raw.beeptest).also {
-                   it.start()
-               }
-               binding.btnAudio.text = resources.getString(R.string.stop_audio)
-           }else{
-               stopPlaying()
-               binding.btnAudio.text = resources.getString(R.string.mulai_audio)
-           }
+            stopPlaying()
+            mediaPlayer = MediaPlayer.create(requireContext(), R.raw.beeptest)
+            if (binding.btnAudio.text == resources.getString(R.string.mulai_audio)) {
+                mediaPlayer.start()
+                binding.btnAudio.text = resources.getString(R.string.stop_audio)
+            } else {
+                binding.btnAudio.text = resources.getString(R.string.mulai_audio)
+            }
         }
         binding.iconAction.setOnClickListener {
             val jenisTest = binding.etJenisPenilaian.text.toString().trim()
@@ -165,13 +167,14 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
 
         }
     }
+
     private fun stopPlaying() {
-        if (mediaPlayer != null) {
-            mediaPlayer!!.stop()
-            mediaPlayer!!.release()
-            mediaPlayer = null
+        if(mediaPlayer.isPlaying){
+            mediaPlayer.stop()
+            mediaPlayer.release()
         }
     }
+
     private fun setNilai(
         id: String,
         kategori: String,
@@ -735,6 +738,11 @@ class TambahPenilaianFragment(private val id: String, private val gender: String
     override fun onStart() {
         super.onStart()
         mBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        stopPlaying()
     }
 
     private fun showView(view: View, size: Int) {
