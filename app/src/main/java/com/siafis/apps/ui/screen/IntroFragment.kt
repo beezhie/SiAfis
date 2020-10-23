@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -12,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.siafis.apps.R
 import com.siafis.apps.databinding.FragmentIntroBinding
 import com.siafis.apps.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 
@@ -72,10 +74,11 @@ class IntroFragment : BaseFragment() {
 
     private fun setupAction() {
         binding.btnSkip.setOnClickListener {
+            lifecycleScope.launch { appPreference.saveIntro(true) }
             if (auth.currentUser == null) {
                 findNavController().navigate(R.id.action_introFragment_to_loginFragment)
             } else {
-                findNavController().navigate(R.id.action_introFragment_to_tanggalFragment)
+                findNavController().navigate(R.id.action_introFragment_to_mainFragment)
             }
         }
     }

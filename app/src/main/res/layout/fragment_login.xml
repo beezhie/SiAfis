@@ -14,9 +14,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground"
+            app:srcCompat="@drawable/logo"
             app:layout_constraintBottom_toTopOf="@+id/email"
-            app:tint="@color/colorPrimary"/>
+            />
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

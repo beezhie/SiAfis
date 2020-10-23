@@ -33,4 +33,12 @@
     <string name="kategori_tes">Kategori Tes</string>
     <string name="selanjutnya">Selanjutnya</string>
     <string name="lewati">Lewati</string>
+    <string name="sistem_informasi_analisis_fisik_atlet_cabng_olahraga_bola_voli">Sistem Informasi Analisis Fisik Atlet Cabng Olahraga Bola Voli</string>
+    <string name="petunjuk_pelaksanaan_tes">Petunjuk Pelaksanaan Tes</string>
+    <string name="waktu_pelaksanaan_tes">Waktu Pelaksanaan Tes</string>
+    <string name="profil_pengembang">Profil Pengembang</string>
+    <string name="petunjuk_pelaksanaan">Petunjuk Pelaksanaan</string>
+    <string name="profil">Profil</string>
+    <string name="mulai_audio">Mulai Audio</string>
+    <string name="stop_audio">Stop Audio</string>
 </resources>

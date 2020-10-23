@@ -55,19 +55,19 @@
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             android:fitsSystemWindows="true">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/jenispenilaian"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -121,6 +121,18 @@
                             android:digits="0123456789."
                             android:singleLine="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAudio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mulai_audio"
+                        app:cornerRadius="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/nilai"
+                        android:layout_marginTop="32dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/nilai"
+                        />
             </androidx.constraintlayout.widget.ConstraintLayout>
             <View
                     android:id="@+id/lyt_spacer"

@@ -41,13 +41,9 @@ class TanggalFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         appPreference.tanggal.asLiveData().observe(viewLifecycleOwner, { guideTanggal ->
-            println("GUIDE $guideTanggal")
             if (guideTanggal == null || !guideTanggal) {
                 setGuideDate(
-                    binding.imgAdd,
-                    1,
-                    "Menu Tambah",
-                    "Menu ini digunakan untuk menambahkan tanggal pendataan atlet"
+                    binding.imgAdd
                 )
             }
         })
@@ -73,9 +69,7 @@ class TanggalFragment : BaseFragment() {
             fragment.setTargetFragment(this, 1)
             fragment.show(parentFragmentManager, fragment.tag)
         }
-        binding.imgProfil.setOnClickListener {
-            findNavController().navigate(R.id.action_tanggalFragment_to_profilFragment, null, getNavOptions())
-        }
+
         tanggalAdapter.itemClick(object : TanggalAdapter.OnItemClick {
             override fun onItemClicked(item: Tanggal) {
                 val bundle = Bundle()
@@ -98,25 +92,17 @@ class TanggalFragment : BaseFragment() {
         })
     }
 
-    private fun setGuideDate(view: View, posisi: Int, title: String, description: String) {
+    private fun setGuideDate(view: View) {
         GuideView.Builder(requireContext())
-            .setTitle(title)
-            .setContentText(description)
+            .setTitle("Menu Tambah")
+            .setContentText("Menu ini digunakan untuk menambahkan tanggal pendataan atlet")
             .setContentTextSize(12)//optional
             .setTitleTextSize(14)
             .setGravity(Gravity.center)
             .setTargetView(view)
             .setDismissType(DismissType.anywhere)
             .setGuideListener {
-                when (posisi) {
-                    1 -> setGuideDate(
-                        binding.imgProfil,
-                        2,
-                        "Menu Profil",
-                        "Menu ini digunakan untuk menampilkan profil pengembang aplikasi"
-                    )
-                    else -> lifecycleScope.launch { appPreference.saveTanggal(true) }
-                }
+                lifecycleScope.launch { appPreference.saveTanggal(true) }
             }
             .build()
             .show()

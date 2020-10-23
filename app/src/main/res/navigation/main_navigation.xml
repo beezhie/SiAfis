@@ -20,7 +20,7 @@
                 app:popUpToInclusive="true"/>
         <action
                 android:id="@+id/action_splashScreenFragment_to_homeFragment"
-                app:destination="@id/tanggalFragment"
+                app:destination="@id/mainFragment"
                 app:enterAnim="@anim/enter_from_top"
                 app:exitAnim="@anim/exit_to_bottom"
                 app:popUpTo="@id/splashScreenFragment"
@@ -40,7 +40,7 @@
             tools:layout="@layout/fragment_login">
         <action
                 android:id="@+id/action_loginFragment_to_homeFragment"
-                app:destination="@id/tanggalFragment"
+                app:destination="@id/mainFragment"
                 app:enterAnim="@anim/enter_from_top"
                 app:exitAnim="@anim/exit_to_bottom"
                 app:popUpTo="@id/loginFragment"
@@ -54,9 +54,7 @@
         <action
                 android:id="@+id/action_tanggalFragment_to_atletFragment"
                 app:destination="@id/atletFragment"/>
-        <action
-                android:id="@+id/action_tanggalFragment_to_profilFragment"
-                app:destination="@id/profilFragment"/>
+
     </fragment>
     <fragment
             android:id="@+id/atletFragment"
@@ -76,8 +74,8 @@
                 app:popUpTo="@id/introFragment"
                 app:popUpToInclusive="true"/>
         <action
-                android:id="@+id/action_introFragment_to_tanggalFragment"
-                app:destination="@id/tanggalFragment"
+                android:id="@+id/action_introFragment_to_mainFragment"
+                app:destination="@id/mainFragment"
                 app:enterAnim="@anim/enter_from_top"
                 app:exitAnim="@anim/exit_to_bottom"
                 app:popUpTo="@id/introFragment"
@@ -88,4 +86,24 @@
             android:name="com.siafis.apps.ui.screen.ProfilFragment"
             android:label="fragment_profil"
             tools:layout="@layout/fragment_profil"/>
+    <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.siafis.apps.ui.screen.MainFragment"
+            android:label="fragment_main"
+            tools:layout="@layout/fragment_main">
+        <action
+                android:id="@+id/action_mainFragment_to_tanggalFragment"
+                app:destination="@id/tanggalFragment"/>
+        <action
+                android:id="@+id/action_mainFragment_to_profilFragment"
+                app:destination="@id/profilFragment"/>
+        <action
+                android:id="@+id/action_mainFragment_to_petunjukFragment"
+                app:destination="@id/petunjukFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/petunjukFragment"
+            android:name="com.siafis.apps.ui.screen.PetunjukFragment"
+            android:label="fragment_petunjuk"
+            tools:layout="@layout/fragment_petunjuk"/>
 </navigation>

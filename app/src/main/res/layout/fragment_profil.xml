@@ -26,7 +26,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Profil"
+                    android:text="@string/profil"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
