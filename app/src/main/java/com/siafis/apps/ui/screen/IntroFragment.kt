@@ -41,12 +41,12 @@ class IntroFragment : BaseFragment() {
         ),
         listOf(
             "Aplikasi Analisis fisik Atlet cabang olahraga Bola Voli",
-            "Vertical Jump atau lompatan vertikal adalah tindakan melompat ke atas ke udara. Ini adalah latihan yang efektif untuk membangun daya tahan dan daya ledak. Ini juga merupakan tes standar untuk mengukur output daya atlet.",
-            "Hexagonal tes adalah tes kelincahan dengan melompat dalam berbagai arah, dengan kecepatan dan juga tes kemampuan untuk bergerak cepat sekaligus menjaga keseimbangan dan konsentrasi. Tes ini mengharuskan atlet untuk melakukan serangkaian dua kaki bolak-balik melompati sisi sebuah segi enam.",
-            "Multistage Fitness Test adalah salah satu cara untuk mengetahui tingkat kebugaran jasmani seseorang. Biasanya tes MFT ini dilakukan pada olahraga bola basket, yang ditujukan untuk mengetahui kebugaran jasmani atlet serta wasitnya.",
-            "Belum tahu",
-            "Push up adalah salah satu macam bentuk tes untuk mengukur kekuatan otot lengan."
-        ,"Akselerasi adalah suatu latihan yang di dalamnya berangsur-angsur adanya suatu kreasi atau jeda lari cepat dari jogging untuk jalan diakhiri dengan lari cepa"
+            "Tes ini bertujuan untuk mengukur gerak eksplosif tubuh",
+            "Tes ini untuk mengetahui tingkatan kelincahan seorang atlet atau siswa",
+            "Untuk memperkirakan atau mengetahui kemampuan aerobik. Hasil tes ini untuk memprediksi berapa lama seseorang mampu beraktivitas dan bertahan dalam kondisi aerobik",
+            "Tujuan Tes ini adalah untuk mengukur koordinasi Mata-tangan Atlet atau Siswa",
+            "Tujuan dari tes sit up ini adalah untuk mengetahui kekuatan otot perut ",
+            "Tujuan dari tes kecepatan sprint adalah untuk menilai kecepatan lari yang maksimal kecepatan. Ini melibatkan menjalankan satu sprint maksimum pada jarak yang ditentukan."
         )
     )
 

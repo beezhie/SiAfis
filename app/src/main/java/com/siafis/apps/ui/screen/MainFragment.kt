@@ -28,13 +28,13 @@ class MainFragment : BaseFragment() {
     }
 
     private fun setupAction() {
-        binding.tvPengembang.setOnClickListener {
+        binding.btnPengembang.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_profilFragment, null, getNavOptions())
         }
-        binding.tvPelaksanaan.setOnClickListener {
+        binding.btnPelaksanaan.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_tanggalFragment, null, getNavOptions())
         }
-        binding.tvPetunjuk.setOnClickListener {
+        binding.btnPetunjuk.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_petunjukFragment, null, getNavOptions())
         }
     }
