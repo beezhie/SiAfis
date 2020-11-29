@@ -21,7 +21,7 @@ class LoginFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
@@ -65,13 +65,16 @@ class LoginFragment : BaseFragment() {
                 )
             )
             if (!validation.contains(false)) {
+                dialogBuilder.show()
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    dialogBuilder.hide()
                     if (it.isSuccessful) {
                         findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                     } else {
                         binding.root.snackBar(it.exception?.message)
                     }
                 }.addOnFailureListener {
+                    dialogBuilder.hide()
                     binding.root.snackBar(it.message)
                 }
             }

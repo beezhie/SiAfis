@@ -15,9 +15,7 @@ import com.siafis.apps.data.adapter.TanggalAdapter
 import com.siafis.apps.data.model.Tanggal
 import com.siafis.apps.databinding.FragmentTanggalBinding
 import com.siafis.apps.ui.base.BaseFragment
-import com.siafis.apps.utils.snackBar
-import com.siafis.apps.utils.timeToDate
-import com.siafis.apps.utils.toTimeStamp
+import com.siafis.apps.utils.*
 import kotlinx.coroutines.launch
 import smartdevelop.ir.eram.showcaseviewlib.GuideView
 import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
@@ -34,7 +32,7 @@ class TanggalFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
@@ -109,6 +107,7 @@ class TanggalFragment : BaseFragment() {
     }
 
     private fun addTanggal(tanggal: Date?) {
+        dialogBuilder.show()
         val date = hashMapOf(
             "tanggal" to tanggal?.time
         )
@@ -118,13 +117,16 @@ class TanggalFragment : BaseFragment() {
             .add(date)
             .addOnSuccessListener {
                 binding.root.snackBar("Document added")
+                dialogBuilder.hide()
             }
             .addOnFailureListener { e ->
                 binding.root.snackBar("Error adding document : $e")
+                dialogBuilder.hide()
             }
     }
 
     private fun getTanggal() {
+        dialogBuilder.show()
         db.collection("afis")
             .document(auth.currentUser!!.uid)
             .collection("tanggal")
@@ -132,6 +134,7 @@ class TanggalFragment : BaseFragment() {
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     binding.root.snackBar("Error document : $e")
+                    dialogBuilder.hide()
                     return@addSnapshotListener
                 }
                 if (snapshot != null) {
@@ -145,7 +148,7 @@ class TanggalFragment : BaseFragment() {
                 } else {
                     binding.root.snackBar("Data Kosong")
                 }
-
+                dialogBuilder.hide()
             }
     }
 

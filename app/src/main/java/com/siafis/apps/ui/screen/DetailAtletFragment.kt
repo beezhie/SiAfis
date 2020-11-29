@@ -1,6 +1,5 @@
 package com.siafis.apps.ui.screen
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.Resources
 import android.os.Bundle
@@ -37,7 +36,6 @@ class DetailAtletFragment(val atlet: Atlet) : BottomSheetDialogFragment() {
         return dialog
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setupUI() {
         mBehavior = BottomSheetBehavior.from(binding.root.parent as View)
         mBehavior.peekHeight = BottomSheetBehavior.PEEK_HEIGHT_AUTO
@@ -84,6 +82,4 @@ class DetailAtletFragment(val atlet: Atlet) : BottomSheetDialogFragment() {
             requireContext().theme.obtainStyledAttributes(intArrayOf(R.attr.actionBarSize))
         return styledAttributes.getDimension(0, 0f).toInt()
     }
-
-
 }

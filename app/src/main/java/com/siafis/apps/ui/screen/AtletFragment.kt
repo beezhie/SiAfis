@@ -41,7 +41,7 @@ class AtletFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
@@ -173,6 +173,7 @@ class AtletFragment : BaseFragment() {
     }
 
     private fun addAtlet(atlet: Serializable) {
+        dialogBuilder.show()
         db.collection("afis")
             .document(auth.currentUser!!.uid)
             .collection("tanggal")
@@ -180,14 +181,17 @@ class AtletFragment : BaseFragment() {
             .collection("atlet")
             .add(atlet)
             .addOnSuccessListener {
+                dialogBuilder.hide()
                 binding.root.snackBar("Document added")
             }
             .addOnFailureListener { e ->
+                dialogBuilder.hide()
                 binding.root.snackBar("Error adding document : $e")
             }
     }
 
     private fun addPenilaian(atlet: String, type: String, nilai: Serializable) {
+        dialogBuilder.show()
         val key = kategori.filterValues { it == type }.keys.toString()
 
         db.collection("afis")
@@ -198,14 +202,17 @@ class AtletFragment : BaseFragment() {
             .document(atlet)
             .update(key.substring(1, key.length - 1), nilai)
             .addOnSuccessListener {
+                dialogBuilder.hide()
                 binding.root.snackBar("Nilai added")
             }
             .addOnFailureListener { e ->
+                dialogBuilder.hide()
                 binding.root.snackBar("Error adding nilai : $e")
             }
     }
 
     private fun getAtlet() {
+        dialogBuilder.show()
         db.collection("afis")
             .document(auth.currentUser!!.uid)
             .collection("tanggal")
@@ -215,6 +222,7 @@ class AtletFragment : BaseFragment() {
                 binding.txtSort.gone()
                 if (e != null) {
                     binding.root.snackBar("Error document : $e")
+                    dialogBuilder.hide()
                     return@addSnapshotListener
                 }
                 if (snapshot != null && !snapshot.isEmpty) {
@@ -240,10 +248,10 @@ class AtletFragment : BaseFragment() {
                 } else {
                     binding.root.snackBar("Data Kosong")
                 }
+                dialogBuilder.hide()
             }
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val result = data?.extras
@@ -269,7 +277,7 @@ class AtletFragment : BaseFragment() {
             4 -> {
                 val gender = result?.getString("gender")!!
                 val kategori = result.getString("kategori")!!
-                println("Gender : $gender | Kategori : $kategori")
+
                 atletAdapter.filterKategori(kategori = kategori, gender = gender)
                 binding.txtSort.visible()
                 binding.txtSort.text = "Diurutkan berdasarkan tes : $kategori"

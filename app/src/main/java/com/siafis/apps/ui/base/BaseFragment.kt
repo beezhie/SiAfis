@@ -1,8 +1,10 @@
 package com.siafis.apps.ui.base
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.siafis.apps.R
@@ -28,6 +30,8 @@ open class BaseFragment : Fragment() {
         "K000" to "Reset"
     )
 
+    protected lateinit var dialogBuilder:AlertDialog
+
     protected lateinit var appPreference: AppPreference
     protected lateinit var db: FirebaseFirestore
     protected lateinit var auth: FirebaseAuth
@@ -37,5 +41,9 @@ open class BaseFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         appPreference = AppPreference(requireContext())
+        dialogBuilder = MaterialAlertDialogBuilder(requireContext())
+            .setView(R.layout.dialog_loading)
+            .setCancelable(false)
+            .create()
     }
 }
