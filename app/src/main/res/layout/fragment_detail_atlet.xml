@@ -37,9 +37,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/tambah_tanggal"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:gravity="center_vertical"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    />
 
             <ImageButton
                     android:id="@+id/iconAction"

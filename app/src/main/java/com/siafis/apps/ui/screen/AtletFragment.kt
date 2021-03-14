@@ -1,6 +1,5 @@
 package com.siafis.apps.ui.screen
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +9,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
 import com.siafis.apps.data.model.Hasil
 import com.siafis.apps.databinding.FragmentAtletBinding
 import com.siafis.apps.ui.base.BaseFragment
+import com.siafis.apps.utils.firstWordCapitalize
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.snackBar
 import com.siafis.apps.utils.visible
@@ -119,18 +120,32 @@ class AtletFragment : BaseFragment() {
             }
 
             override fun onItemDelete(item: Atlet) {
-                db.collection("afis")
-                    .document(auth.currentUser!!.uid)
-                    .collection("tanggal")
-                    .document(id)
-                    .collection("atlet")
-                    .document(item.id!!)
-                    .delete()
-                    .addOnSuccessListener {
-                        binding.root.snackBar("Atlet succes deleted")
-                    }.addOnFailureListener {
-                        binding.root.snackBar("Atlet failure deleted : $it")
+                MaterialAlertDialogBuilder(requireContext()).apply {
+                    setTitle("Hapus Tanggal")
+                    setMessage("Apakah anda akan menghapus data tanggal : ${item.nama?.firstWordCapitalize()} ?")
+                    setPositiveButton(
+                        "OK"
+                    ) { dialog, _ ->
+                        db.collection("afis")
+                            .document(auth.currentUser!!.uid)
+                            .collection("tanggal")
+                            .document(id)
+                            .collection("atlet")
+                            .document(item.id!!)
+                            .delete()
+                            .addOnSuccessListener {
+                                binding.root.snackBar("Atlet succes deleted")
+                                dialog.dismiss()
+                            }.addOnFailureListener {
+                                binding.root.snackBar("Atlet failure deleted : $it")
+                                dialog.dismiss()
+                            }
                     }
+                    setNegativeButton("Batal") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                }.show()
+
             }
 
         })

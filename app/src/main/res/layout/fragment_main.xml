@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -11,7 +10,7 @@
     <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:contentDescription="@string/todo"
             android:src="@drawable/backhome"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +53,7 @@
                 android:text="@string/petunjuk_pelaksanaan_tes"
                 android:padding="16dp"
                 android:gravity="center"
+                android:layout_gravity="center"
                 app:drawableTopCompat="@drawable/petunjuk"
                 />
     </com.google.android.material.card.MaterialCardView>
@@ -78,6 +78,7 @@
                 android:text="@string/waktu_pelaksanaan_tes"
                 android:padding="16dp"
                 android:gravity="center"
+                android:layout_gravity="center"
                 app:drawableTopCompat="@drawable/pelaksanaan"
                 />
     </com.google.android.material.card.MaterialCardView>
@@ -102,6 +103,8 @@
                 android:text="@string/profil_pengembang"
                 android:padding="16dp"
                 android:gravity="center"
+                android:textAlignment="center"
+                android:layout_gravity="center"
                 app:drawableTopCompat="@drawable/profil"
                 />
     </com.google.android.material.card.MaterialCardView>

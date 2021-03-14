@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.siafis.apps.R
 import com.siafis.apps.data.model.Atlet
+import com.siafis.apps.utils.firstWordCapitalize
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.visible
 import java.util.*
@@ -68,7 +69,11 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
                     }
                 )
             }
-        listGetAtlet = result.sortedByDescending { it.copyNilai }.toMutableList()
+        listGetAtlet = if (this.kategori == "Tes Akselerasi 35 Meter") {
+            result.sortedBy { it.copyNilai }.toMutableList()
+        } else {
+            result.sortedByDescending { it.copyNilai }.toMutableList()
+        }
         notifyDataSetChanged()
     }
 
@@ -95,7 +100,7 @@ class AtletAdapter : RecyclerView.Adapter<AtletAdapter.AtletHolder>() {
         private var detail: MaterialButton = itemView.findViewById(R.id.btnDetail)
         private var delete: ImageButton = itemView.findViewById(R.id.imgDelete)
         fun bind(item: Atlet, position: Int) {
-            nama.text = item.nama
+            nama.text = item.nama?.firstWordCapitalize()
             umur.text = "${item.umur.toString()} Tahun"
             gender.text = item.gender
             if (sort) {

@@ -43,11 +43,14 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:drawablePadding="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imgDelete"
                 app:drawableStartCompat="@drawable/ic_baseline_person_24"
-                app:drawableTint="@color/colorPrimary"/>
+                app:drawableTint="@color/colorPrimary"
+                />
         <TextView
                 android:id="@+id/txtKelamin"
                 android:layout_width="0dp"

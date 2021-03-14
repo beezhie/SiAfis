@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.siafis.apps.R
-import com.siafis.apps.databinding.FragmentLoginBinding
+import com.siafis.apps.databinding.FragmentRegistrationBinding
 import com.siafis.apps.ui.base.BaseFragment
 import com.siafis.apps.utils.inputError
 import com.siafis.apps.utils.isEmailValid
 import com.siafis.apps.utils.snackBar
 
+class RegistrationFragment : BaseFragment() {
 
-class LoginFragment : BaseFragment() {
-    private val binding: FragmentLoginBinding by lazy {
-        FragmentLoginBinding.inflate(layoutInflater)
+    private val binding by lazy {
+        FragmentRegistrationBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -32,7 +32,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun setupAction() {
-        binding.btnLogin.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val email = binding.etEmail.text.toString().trim()
             val pass = binding.etPassword.text.toString().trim()
             val validation = arrayOfNulls<Boolean>(2)
@@ -66,10 +66,11 @@ class LoginFragment : BaseFragment() {
             )
             if (!validation.contains(false)) {
                 dialogBuilder.show()
-                auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                     dialogBuilder.hide()
                     if (it.isSuccessful) {
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                        binding.root.snackBar("Registrasi berhasil")
+                        findNavController().navigateUp()
                     } else {
                         binding.root.snackBar(it.exception?.message)
                     }
@@ -78,13 +79,6 @@ class LoginFragment : BaseFragment() {
                     binding.root.snackBar(it.message)
                 }
             }
-        }
-
-        binding.txtRegistraion.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_loginFragment_to_registrationFragment, null,
-                getNavOptions()
-            )
         }
     }
 

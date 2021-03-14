@@ -13,13 +13,9 @@ class AppPreference(
     context: Context
 ) {
     private val applicationContext = context.applicationContext
-    private val dataStore: DataStore<Preferences>
-
-    init {
-        dataStore = applicationContext.createDataStore(
-            name = "app_preferences"
-        )
-    }
+    private val dataStore: DataStore<Preferences> = applicationContext.createDataStore(
+        name = "app_preferences"
+    )
 
     val intro: Flow<Boolean?>
         get() = dataStore.data.map { preferences ->

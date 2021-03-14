@@ -44,7 +44,10 @@
                 app:enterAnim="@anim/enter_from_top"
                 app:exitAnim="@anim/exit_to_bottom"
                 app:popUpTo="@id/loginFragment"
-                app:popUpToInclusive="true"/>
+                app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_loginFragment_to_registrationFragment"
+                app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
             android:id="@+id/tanggalFragment"
@@ -96,14 +99,19 @@
                 app:destination="@id/tanggalFragment"/>
         <action
                 android:id="@+id/action_mainFragment_to_profilFragment"
-                app:destination="@id/profilFragment"/>
+                app:destination="@id/profilFragment" />
         <action
                 android:id="@+id/action_mainFragment_to_petunjukFragment"
-                app:destination="@id/petunjukFragment"/>
+                app:destination="@id/petunjukFragment" />
     </fragment>
     <fragment
             android:id="@+id/petunjukFragment"
             android:name="com.siafis.apps.ui.screen.PetunjukFragment"
             android:label="fragment_petunjuk"
-            tools:layout="@layout/fragment_petunjuk"/>
+            tools:layout="@layout/fragment_petunjuk" />
+    <fragment
+            android:id="@+id/registrationFragment"
+            android:name="com.siafis.apps.ui.screen.RegistrationFragment"
+            android:label="fragment_registration"
+            tools:layout="@layout/fragment_registration" />
 </navigation>

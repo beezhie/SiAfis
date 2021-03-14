@@ -9,6 +9,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.firestore.Query
 import com.siafis.apps.R
 import com.siafis.apps.data.adapter.TanggalAdapter
@@ -72,20 +73,37 @@ class TanggalFragment : BaseFragment() {
             override fun onItemClicked(item: Tanggal) {
                 val bundle = Bundle()
                 bundle.putString(AtletFragment.ID, item.id)
-                findNavController().navigate(R.id.action_tanggalFragment_to_atletFragment, bundle, getNavOptions())
+                findNavController().navigate(
+                    R.id.action_tanggalFragment_to_atletFragment,
+                    bundle,
+                    getNavOptions()
+                )
             }
 
             override fun onItemDelete(item: Tanggal) {
-                db.collection("afis")
-                    .document(auth.currentUser!!.uid)
-                    .collection("tanggal")
-                    .document(item.id)
-                    .delete()
-                    .addOnSuccessListener {
-                        binding.root.snackBar("Document succes deleted")
-                    }.addOnFailureListener {
-                        binding.root.snackBar("Document failure deleted : $it")
+                MaterialAlertDialogBuilder(requireContext()).apply {
+                    setTitle("Hapus Tanggal")
+                    setMessage("Apakah anda akan menghapus data tanggal : ${item.tanggal} ?")
+                    setPositiveButton(
+                        "OK"
+                    ) { dialog, _ ->
+                        db.collection("afis")
+                            .document(auth.currentUser!!.uid)
+                            .collection("tanggal")
+                            .document(item.id)
+                            .delete()
+                            .addOnSuccessListener {
+                                binding.root.snackBar("Document succes deleted")
+                                dialog.dismiss()
+                            }.addOnFailureListener {
+                                binding.root.snackBar("Document failure deleted : $it")
+                                dialog.dismiss()
+                            }
                     }
+                    setNegativeButton("Batal") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                }.show()
             }
         })
     }
@@ -137,7 +155,7 @@ class TanggalFragment : BaseFragment() {
                     dialogBuilder.hide()
                     return@addSnapshotListener
                 }
-                if (snapshot != null) {
+                if (snapshot != null && !snapshot.isEmpty) {
                     val tanggal = ArrayList<Tanggal>()
                     for (doc in snapshot) {
                         doc.getLong("tanggal").let {

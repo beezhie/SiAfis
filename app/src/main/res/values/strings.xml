@@ -42,4 +42,7 @@
     <string name="mulai_audio">Mulai Audio</string>
     <string name="stop_audio">Stop Audio</string>
     <string name="silahkan_pilih_menu_dibawah">Silahkan Pilih Menu Dibawah :</string>
+    <string name="belum_punya_akun">Belum punya akun ?</string>
+    <string name="daftar_disini">Daftar disini</string>
+    <string name="register">Register</string>
 </resources>

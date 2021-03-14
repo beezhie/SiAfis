@@ -13,6 +13,7 @@ import com.siafis.apps.data.adapter.HasilAdapter
 import com.siafis.apps.data.model.Atlet
 import com.siafis.apps.data.model.Hasil
 import com.siafis.apps.databinding.FragmentDetailAtletBinding
+import com.siafis.apps.utils.firstWordCapitalize
 import com.siafis.apps.utils.gone
 import com.siafis.apps.utils.visible
 
@@ -44,7 +45,7 @@ class DetailAtletFragment(val atlet: Atlet) : BottomSheetDialogFragment() {
         showView(binding.appBarLayout, getActionBarSize())
         binding.iconAction.gone()
 
-        binding.nameUser.text = atlet.nama
+        binding.nameUser.text = atlet.nama?.firstWordCapitalize()
         binding.txtJenis.text = ": ${atlet.gender}"
         binding.txtUmur.text = ": ${atlet.umur.toString()} Tahun"
 

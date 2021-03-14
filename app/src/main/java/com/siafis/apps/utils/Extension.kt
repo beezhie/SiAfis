@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.Editable
 import android.view.View
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -120,4 +119,16 @@ fun TextInputEditText.openCalender(
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
+}
+
+fun String.firstWordCapitalize(): String {
+    var result = ""
+    split(" ").forEach {
+        result += if (it.isNotEmpty() && it.isNotBlank()) {
+            "${it[0].toUpperCase()}${it.substring(1).toLowerCase(Locale.ROOT)} "
+        } else {
+            ""
+        }
+    }
+    return result
 }
