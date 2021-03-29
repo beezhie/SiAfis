@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.firestore.Query
 import com.siafis.apps.data.adapter.AtletAdapter
 import com.siafis.apps.data.model.Atlet
 import com.siafis.apps.data.model.Hasil
@@ -233,6 +234,7 @@ class AtletFragment : BaseFragment() {
             .collection("tanggal")
             .document(id)
             .collection("atlet")
+            .orderBy("nama", Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, e ->
                 binding.txtSort.gone()
                 if (e != null) {
